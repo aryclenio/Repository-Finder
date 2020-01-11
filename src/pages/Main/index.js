@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
+import {
+  FaGithubAlt,
+  FaPlus,
+  FaSpinner,
+  FaArrowCircleRight,
+} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Container, Form, SubmitButton, List } from './styles';
+import { Form, SubmitButton, List } from './styles';
 import api from '../../services/api';
+import Container from '../../components/Container';
 
 export default class Main extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     newRepo: '',
     repositories: [],
@@ -53,12 +60,12 @@ export default class Main extends Component {
       <Container>
         <h1>
           <FaGithubAlt />
-          Repositórios
+          Github Repository Search
         </h1>
         <Form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            placeholder="Adicionar Repositório"
+            placeholder="Search Repository"
             value={newRepo}
             onChange={this.handleInputChange}
           />
@@ -76,7 +83,11 @@ export default class Main extends Component {
             <li key={repository.name}>
               <span>{repository.name}</span>
               <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
-                Detalhes
+                <FaArrowCircleRight
+                  color="#232526"
+                  size={14}
+                  title="Go to repository description"
+                />
               </Link>
             </li>
           ))}
